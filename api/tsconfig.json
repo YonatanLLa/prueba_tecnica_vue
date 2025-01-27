@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                   // Versión de JavaScript
+    "module": "commonjs",              // Módulos de Node.js
+    "outDir": "./dist",                // Carpeta de salida
+    "rootDir": "./src",                // Carpeta raíz del código fuente
+    "strict": true,                    // Activar verificaciones estrictas
+    "esModuleInterop": true,           // Importación de módulos compatibles
+    "skipLibCheck": true,              // Ignorar revisiones de declaraciones
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],                  // Solo compilar archivos en `src`
+  "exclude": ["node_modules", "dist"]  // Ignorar estas carpetas
+}

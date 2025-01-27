@@ -1,0 +1,55 @@
+import type { ModalConfig } from "../models/modalModel";
+
+export const defaultModalConfig: ModalConfig = {
+  title: "",
+  content: "",
+  image: "",
+  isVisibleModal: false,
+  isVisibleNavegation: false,
+  isActionFromModal: false,
+  isFinalizedModal: false,
+  isVisibleImage: false,
+  isValidationIsland: false,
+  isVisibleFromModal: false,
+  isVisibleBottomEdit: false,
+  isSecondModal: false,
+  buttonText: "Next",
+  cancelText: "Cancelar",
+  onNext: () => {},
+};
+
+export const createModalConfig = ({
+  title = "",
+  content = "",
+  image = "",
+  isVisibleModal = false,
+  isVisibleNavegation = false,
+  isFinalizedModal = false,
+  isActionFromModal = false,
+  isValidationIsland = false,
+  isVisibleImage = false,
+  isVisibleFromModal = false,
+  isVisibleBottomEdit = false,
+  isSecondModal = false,
+  buttonText = "Next",
+  cancelText = "Cancelar",
+  onNext = () => {},
+}: Partial<ModalConfig>): ModalConfig => {
+  return {
+    title,
+    content,
+    image,
+    isVisibleModal,
+    isVisibleNavegation,
+    isActionFromModal,
+    isFinalizedModal,
+    isValidationIsland,
+    isVisibleImage,
+    isVisibleFromModal,
+    isVisibleBottomEdit,
+    isSecondModal,
+    buttonText,
+    cancelText,
+    onNext,
+  };
+};
