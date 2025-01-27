@@ -163,21 +163,21 @@ const { currentStep, computedSteps, nextStep, resetSteps } = useSteps();
           <button
             v-if="modalConfig.cancelText !== ''"
             @click="hideModalRestSteps"
-            class="px-4 py-1 bg-gray-300 rounded-[50px] hover:bg-gray-400 w-full"
+            class="px-4 py-1 cursor-pointer bg-gray-300 rounded-[50px] hover:bg-gray-400 w-full"
           >
             {{ modalConfig.cancelText }}
           </button>
           <button
             v-if="!modalConfig.isValidationIsland"
             @click="tiggerNextStep"
-            class="px-4 py-1 bg-white text-[#431680] rounded-[50px] hover:bg-white/80 w-full"
+            class="px-4 py-1 cursor-pointer bg-white text-[#431680] rounded-[50px] hover:bg-white/80 w-full"
           >
             {{ modalConfig.buttonText }}
           </button>
           <button
             @click="tiggerNextStepFinaly"
             v-if="modalConfig.isValidationIsland"
-            class="px-4 py-1 bg-white text-[#431680] rounded-[50px] hover:bg-white/80 w-full"
+            class="px-4 py-1 cursor-pointer bg-white text-[#431680] rounded-[50px] hover:bg-white/80 w-full"
           >
             {{ modalConfig.buttonText }}
           </button>

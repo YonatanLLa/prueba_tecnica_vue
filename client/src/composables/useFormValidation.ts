@@ -7,7 +7,17 @@ const schema = yup.object({
   password: yup
     .string()
     .required("La contraseña es obligatoria")
-    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+    .min(12, "La contraseña debe tener al menos 12 caracteres")
+    .matches(
+      /[a-z]/,
+      "La contraseña debe contener al menos una letra minúscula"
+    )
+    .matches(
+      /[A-Z]/,
+      "La contraseña debe contener al menos una letra mayúscula"
+    )
+    .matches(/\d/, "La contraseña debe contener al menos un número"),
+
   confirmPassword: yup
     .string()
     .required("Debes confirmar tu contraseña")
