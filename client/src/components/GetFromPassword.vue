@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import axios from "axios";
 import { ref } from "vue";
 import { onMounted } from "vue";
 const showPassword = ref(false);
@@ -11,12 +12,11 @@ const togglePasswordVisibility = () => {
 
 const fetchUserData = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/api/users/${userId.value}`);
-    if (!response.ok) {
-      throw new Error("Error al obtener los datos del usuario");
-    }
+    const response = await axios.get(`http://localhost:3000/api/users/${userId.value}`);
+    const data = response.data;
+   
     
-    const data = await response.json();
+    // const data = await response.json();
     
     userPassword.value = data.password;
   } catch (error) {

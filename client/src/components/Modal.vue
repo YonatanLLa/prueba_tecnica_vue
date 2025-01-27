@@ -47,9 +47,8 @@ const tiggerNextStep = async () => {
 const handleFormSubmit = (isValid: boolean) => {
   if (isValid) {
     console.log('Formulario enviado correctamente');
-    // Continúa con el siguiente paso si el formulario es válido
     triggerNext();
-    nextStep(); // Este es el paso siguiente en tu proceso
+    nextStep(); 
   } else {
     console.log('Formulario no válido');
   }
@@ -57,7 +56,6 @@ const handleFormSubmit = (isValid: boolean) => {
 
 const hideModalRestSteps = () => {
   if (modalConfig.value.isSecondModal) {
-    
     localStorage.setItem('secondModal', secondModal.value);
     hideModal();
     resetSteps();
@@ -82,8 +80,8 @@ const { currentStep, computedSteps, nextStep, resetSteps } = useSteps();
     v-if="isVisible"
     class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
   >
-    <div class="bg-[#5B1DAA] rounded-lg shadow-xl w-[452px] h-[560px] flex items-center flex-col justify-center">
-      <div class="flex flex-col items-center gap-[24px] p-[16px] pt-[20px]">
+    <div class="bg-[#5B1DAA] rounded-lg shadow-xl w-[452px] h-[560px] flex items-center flex-col justify-center"> 
+      <div :class="modalConfig.isVisibleNavegation ? 'flex flex-col items-center gap-9 p-[16px] pt-[20px]' : 'flex flex-col items-center gap-[24px] p-[16px] pt-[20px]'">
         <!-- Indicadores de pasos -->
         <div v-if="!modalConfig.isVisibleNavegation" class="flex gap-[8px]">
           <div
@@ -113,8 +111,16 @@ const { currentStep, computedSteps, nextStep, resetSteps } = useSteps();
         </div>
 
         <!-- Contenido -->
-        <div class="flex flex-col items-center gap-[8px]">
-          <h2 class="text-white text-[24px] font-bold">{{ modalConfig.title }}</h2>
+        <div :class="modalConfig.isVisibleNavegation ? 'flex flex-col items-center gap-4': 'flex flex-col items-center gap-[8px]'">
+          <h2 class="text-white text-[24px] font-bold" v-if="!modalConfig.isVisibleNavegation">{{ modalConfig.title }}</h2>
+          <div :class="modalConfig.isVisibleNavegation ? 'flex justify-between items-center w-full' : ''" v-if="modalConfig.isVisibleNavegation">
+            <h2 class="text-white text-[24px] font-bold">{{ modalConfig.title }}</h2>
+            <button class=" cursor-pointer">
+              <svg @click="hideModal"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+            </button>
+          </div>
           <p class="text-[18px] text-white">{{ modalConfig.content }}</p>
         </div>
         <div class="w-[420px] h-[240px] flex items-center justify-center overflow-hidden relative">
@@ -136,7 +142,7 @@ const { currentStep, computedSteps, nextStep, resetSteps } = useSteps();
               class="w-full h-full object-cover rounded-lg"
             />
           </div>
-          <div v-if="modalConfig.isVisibleModal" class="relative w-full h-full flex items-center justify-center">
+          <div v-if="modalConfig.isVisibleModal" class="relative w-full h-full flex flex-col items-center justify-center">
             <div 
                 class="absolute inset-0 w-full h-full bg-cover bg-center rounded-lg" 
                 :style="{ backgroundImage: `url(${modalConfig.image})` }"
@@ -147,16 +153,20 @@ const { currentStep, computedSteps, nextStep, resetSteps } = useSteps();
             <div v-if="!modalConfig.isVisibleFromModal && !modalConfig.isVisibleBottomEdit" class="relative z-10 p-8 bg-opacity-90 rounded-lg">
               <FormPassword ref="formRef"  @formSubmitted="handleFormSubmit" />
             </div>
-            <div v-if="modalConfig.isVisibleBottomEdit" class="relative z-10 p-8 bg-opacity-90 rounded-lg">
+            <div v-if="modalConfig.isVisibleBottomEdit" class="relative z-10 bg-opacity-90 rounded-lg">
               <FormPassword ref="formRef"  :informationEdit="informationEdit"  
               :isEdit="isEdit"
               @formSubmitted="handleFormSubmit" />
             </div>
-            <div v-if="modalConfig.isVisibleFromModal" class="relative z-10 p-8 bg-opacity-90 rounded-lg">
+            <div v-if="modalConfig.isVisibleFromModal" class="relative z-10 bg-opacity-90 rounded-lg">
               <GetFromPassword  />
             </div>
+            
+            
           </div>
         </div>
+
+      
 
         <!-- Botones -->
         <div class="w-full mt-4 flex justify-center items-center gap-6">
